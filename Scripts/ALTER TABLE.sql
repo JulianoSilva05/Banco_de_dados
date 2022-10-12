@@ -1,0 +1,9 @@
+/*
+ALTER TABLE nome_da_tabela MODIFY COLUMN coluna tipo NOT NULL UNIQUE;
+ALTER TABLE nome_da_tabela ADD COLUMN coluna tipo NOT NULL UNIQUE;
+ALTER TABLE nome_da_tabela DROP COLUMN coluna;
+*/
+ALTER TABLE pessoas MODIFY COLUMN email VARCHAR(255) NOT NULL UNIQUE;
+ALTER TABLE pessoas ADD COLUMN sexo char(2) NOT NULL;
+ALTER TABLE pessoas DROP COLUMN sexo;
+DESC pessoas;

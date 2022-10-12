@@ -1,4 +1,5 @@
 CREATE DATABASE constraints;
+USE constraints;
 
 # 1 - NOT NULL
 CREATE TABLE pessoas(
@@ -7,14 +8,20 @@ CREATE TABLE pessoas(
 );
 
 INSERT INTO pessoas (nome) VALUES ("Matheus");
-
+SELECT * FROM pessoas;
+/*Teste em banco do dados - tento inserir um valor 
+"NULL" em um atributo que não aceita NULL*/
 INSERT INTO pessoas (nome, idade) VALUES (NULL, 30);
+INSERT INTO pessoas (nome, idade) VALUES ("João",NULL);
+INSERT INTO pessoas (nome) VALUES ("Maria");
+INSERT INTO pessoas (idade) VALUES (18);
 
 #2 - UNIQUE
 ALTER TABLE pessoas ADD COLUMN email VARCHAR(255) UNIQUE;
 
 INSERT INTO pessoas (nome, idade, email) VALUES ("João", 30, "joao@gmai.com");
-
+INSERT INTO pessoas (nome, idade, email) VALUES ("João Paulo", 25, "joao@gmai.com");
+INSERT INTO pessoas (nome, idade, email) VALUES ("João Paulo", 25, "joaop@gmai.com");
 # 3 - PRIMARY KEY
 CREATE TABLE produtos(
   id INT NOT NULL,
@@ -22,11 +29,10 @@ CREATE TABLE produtos(
   sku VARCHAR(10),
   PRIMARY KEY (id)
 );
+DESC produtos;
 
 INSERT INTO produtos (id, nome, sku) VALUES (1, 'Batedeira', '123asd');
-
 INSERT INTO produtos (id, nome, sku) VALUES (NULL, 'Fogão', '1244');
-
 INSERT INTO produtos (id, nome, sku) VALUES (1, 'TV', '555');
 
 # 4 - AUTO INCREMENT
@@ -34,11 +40,14 @@ INSERT INTO produtos (id, nome, sku) VALUES (1, 'TV', '555');
 CREATE TABLE frutas (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nome VARCHAR(200)
-)
+);
+
+DESC frutas;
 
 INSERT INTO frutas (nome) VALUES ("Maçã");
 INSERT INTO frutas (nome) VALUES ("Mamão");
 INSERT INTO frutas (nome) VALUES ("Morango");
+SELECT * FROM frutas;
 
 # 5 - FOREIGN KEY
 DROP TABLE pessoas;
@@ -49,6 +58,19 @@ CREATE TABLE pessoas(
   idade INT
 );
 
+INSERT INTO pessoas(nome,idade) VALUES ("juliano", 33);
+ALTER TABLE pessoas ADD COLUMN email VARCHAR(40) NOT NULL UNIQUE;
+ALTER TABLE pessoas MODIFY COLUMN email VARCHAR(255) NOT NULL UNIQUE;
+DESC pessoas;
+SELECT * FROM pessoas;
+UPDATE pessoas SET email = "julianoqm@gmail.com"
+WHERE id=1;
+
+INSERT INTO pessoas(nome,idade) VALUES ("Juliano", 33,"julianoqm@gmail.com");
+/*UPDATE altera o registro, ALTER TABLE altera a tabela*/
+UPDATE pessoas SET nome = "Juliano", idade=30, email="julianoqm2@gmail.com"
+WHERE id=1;
+
 CREATE TABLE enderecos (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   rua VARCHAR(100),
@@ -57,12 +79,13 @@ CREATE TABLE enderecos (
   FOREIGN KEY (pessoa_id) REFERENCES pessoas(id)
 );
 
-INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 555);
-
-INSERT INTO pessoas (nome, idade) VALUES ("Pedro", 32);
 INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 1);
+INSERT INTO pessoas (nome, idade) VALUES ("Pedro", 32); 
+INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 1);
+SELECT * FROM enderecos;
 
-DROP TABLE pessoas; // após insert
+
+DROP TABLE pessoas; 
 
 # 6 - INDEX
 
