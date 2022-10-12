@@ -3,4 +3,4 @@
 SELECT salary FROM salaries ORDER BY salary ASC LIMIT 1;
 
 /*Com funsão*/
-SELECT MIN(salary) FROM salaries;
+SELECT MIN(salary) AS salary FROM salaries;

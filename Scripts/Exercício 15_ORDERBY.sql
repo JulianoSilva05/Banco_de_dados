@@ -4,4 +4,5 @@ Selecione na tabela titles todas as colunas, porém ordene os títulos por ordem
 */
 DESC titles;
 SELECT * FROM titles
-ORDER BY title DESC;
+ORDER BY title DESC
+LIMIT 40;
