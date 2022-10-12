@@ -30,10 +30,21 @@ CREATE TABLE produtos(
   PRIMARY KEY (id)
 );
 DESC produtos;
-
+SELECT * FROM produtos;
 INSERT INTO produtos (id, nome, sku) VALUES (1, 'Batedeira', '123asd');
 INSERT INTO produtos (id, nome, sku) VALUES (NULL, 'Fogão', '1244');
 INSERT INTO produtos (id, nome, sku) VALUES (1, 'TV', '555');
+INSERT INTO produtos (id, nome, sku) VALUES (2, 'TV', '555');
+INSERT INTO produtos (id, nome, sku) VALUES (2, 'TV', '555');
+INSERT INTO produtos (id, nome, sku) VALUES (3, 'TV 20', '555');
+
+/*O SKU é uma codigo que não poderia repetir*/
+ALTER TABLE produtos MODIFY COLUMN sku VARCHAR(10) UNIQUE;
+/*Se tentar alterar a tabela que já tem registros repetidos 
+irá retornar um erro ao tentar alterar a tabela*/
+DELETE FROM produtos WHERE id=3;
+/*Apos apagar o registro que repete o SKU, podemos alterar a tabela colocando SKU como UNIQUE*/
+ALTER TABLE produtos MODIFY COLUMN sku VARCHAR(10) UNIQUE;
 
 # 4 - AUTO INCREMENT
 
@@ -47,16 +58,19 @@ DESC frutas;
 INSERT INTO frutas (nome) VALUES ("Maçã");
 INSERT INTO frutas (nome) VALUES ("Mamão");
 INSERT INTO frutas (nome) VALUES ("Morango");
+INSERT INTO frutas (nome) VALUES ("Laranja");
+DELETE FROM frutas WHERE id = 5;
 SELECT * FROM frutas;
 
-# 5 - PRIMARY KEY
-DROP TABLE pessoas;
+# 5 - FOREIGN KEY
 
+DROP TABLE pessoas;
 CREATE TABLE pessoas(
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nome VARCHAR(100) NOT NULL,
   idade INT
 );
+
 
 INSERT INTO pessoas(nome,idade) VALUES ("juliano", 33);
 ALTER TABLE pessoas ADD COLUMN email VARCHAR(40) NOT NULL UNIQUE;
@@ -71,7 +85,7 @@ INSERT INTO pessoas(nome,idade) VALUES ("Juliano", 33,"julianoqm@gmail.com");
 UPDATE pessoas SET nome = "Juliano", idade=30, email="julianoqm2@gmail.com"
 WHERE id=1;
 
-# 5.1 - FOREIGN KEY
+
 CREATE TABLE enderecos (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   rua VARCHAR(100),
@@ -79,14 +93,14 @@ CREATE TABLE enderecos (
   pessoa_id INT NOT NULL,
   FOREIGN KEY (pessoa_id) REFERENCES pessoas(id)
 );
+DESC enderecos;
 
 INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 1);
 INSERT INTO pessoas (nome, idade) VALUES ("Pedro", 32); 
 INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 1);
 SELECT * FROM enderecos;
 
-
-DROP TABLE pessoas; 
+DELETE FROM enderecos WHERE id>=1;
 
 # 6 - INDEX
 
