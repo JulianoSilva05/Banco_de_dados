@@ -49,7 +49,7 @@ INSERT INTO frutas (nome) VALUES ("Mamão");
 INSERT INTO frutas (nome) VALUES ("Morango");
 SELECT * FROM frutas;
 
-# 5 - FOREIGN KEY
+# 5 - PRIMARY KEY
 DROP TABLE pessoas;
 
 CREATE TABLE pessoas(
@@ -71,6 +71,7 @@ INSERT INTO pessoas(nome,idade) VALUES ("Juliano", 33,"julianoqm@gmail.com");
 UPDATE pessoas SET nome = "Juliano", idade=30, email="julianoqm2@gmail.com"
 WHERE id=1;
 
+# 5.1 - FOREIGN KEY
 CREATE TABLE enderecos (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   rua VARCHAR(100),
