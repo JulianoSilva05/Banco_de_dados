@@ -1,5 +1,4 @@
-/*
-Exercício 22
+/*Exercício 22
 Utilize o INNER JOIN:
 Para selecionar o primeiro nome, genero e cargo;
 Tabelas “employees” e “titles”.

@@ -19,9 +19,9 @@ INSERT INTO pessoas (idade) VALUES (18);
 #2 - UNIQUE
 ALTER TABLE pessoas ADD COLUMN email VARCHAR(255) UNIQUE;
 
-INSERT INTO pessoas (nome, idade, email) VALUES ("João", 30, "joao@gmai.com");
-INSERT INTO pessoas (nome, idade, email) VALUES ("João Paulo", 25, "joao@gmai.com");
-INSERT INTO pessoas (nome, idade, email) VALUES ("João Paulo", 25, "joaop@gmai.com");
+INSERT INTO pessoas (nome, idade, email) VALUES ("João", 30, "joao@gmail.com");
+INSERT INTO pessoas (nome, idade, email) VALUES ("João Paulo", 25, "joao@gmail.com");
+INSERT INTO pessoas (nome, idade, email) VALUES ("João Paulo", 25, "joaop@gmail.com");
 # 3 - PRIMARY KEY
 CREATE TABLE produtos(
   id INT NOT NULL,
@@ -93,13 +93,16 @@ CREATE TABLE enderecos (
   pessoa_id INT NOT NULL,
   FOREIGN KEY (pessoa_id) REFERENCES pessoas(id)
 );
+
+ALTER TABLE enderecos MODIFY COLUMN pessoa_id INT;
 DESC enderecos;
 
-INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 1);
+INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua Passado", "25", 2);
 INSERT INTO pessoas (nome, idade) VALUES ("Pedro", 32); 
-INSERT INTO enderecos (rua, numero, pessoa_id) VALUES ("Rua teste", "12", 1);
+INSERT INTO enderecos (rua, numero) VALUES ("Rua São Paulo", "1352");
+SELECT * FROM pessoas;
 SELECT * FROM enderecos;
-
+DELETE FROM endereco WHERE id = 9;
 DELETE FROM enderecos WHERE id>=1;
 
 # 6 - INDEX
@@ -157,3 +160,54 @@ INNER JOIN salaries
 ON employees.emp_no = salaries.emp_no
 WHERE salaries.salary >= 120000
 ORDER BY employees.first_name ASC;
+
+# Exercício 22
+
+SELECT employees.first_name AS Nome, employees.gender AS Genero, titles.title AS Cargo
+FROM employees
+INNER JOIN titles
+ON employees.emp_no = titles.emp_no;
+
+#LEFT JOIN
+
+USE constraints;
+SELECT * FROM pessoas;
+SELECT * FROM enderecos;
+
+SELECT pessoas.nome,pessoas.id, enderecos.*
+FROM pessoas
+LEFT JOIN enderecos
+ON pessoas.id = enderecos.pessoa_id;
+-- Retorna todos os registros de pessoas, mesmo que o campo pessoa_id esteja NULL
+INSERT INTO pessoas(nome,email)
+VALUES ("Julia","julia@gmail.com");
+
+SELECT * FROM enderecos; -- Não inseri o ID da JULIA na tabela endereco
+SELECT pessoas.nome,pessoas.id, enderecos.*
+FROM pessoas
+LEFT JOIN enderecos
+ON pessoas.id = enderecos.pessoa_id;
+
+-- LEFT JOIN na base EMPLOYEES
+USE employees;
+SELECT employees.first_name, employees.last_name, salaries.salary AS salario
+FROM employees
+LEFT JOIN salaries
+ON employees.emp_no = salaries.emp_no;
+
+#RIGHT JOIN
+SELECT * FROM pessoas;
+SELECT * FROM enderecos;
+SELECT pessoas.nome, enderecos.rua
+FROM enderecos
+RIGHT JOIN pessoas
+ON pessoas.id = enderecos.pessoa_id;
+
+#INNER JOIN EM VARIAS TABELAS
+USE employees;
+SELECT employees.first_name AS NOME, salaries.salary AS SALARIO, titles.title AS Cargo
+FROM employees
+INNER JOIN salaries
+ON employees.emp_no = salaries.emp_no
+INNER JOIN titles
+ON employees.emp_no = titles.emp_no;

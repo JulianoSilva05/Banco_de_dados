@@ -1,4 +1,11 @@
-# EXERCICIO 21
+/*EXERCICIO 21
+ Crie um banco de dados banco e uma tabela chamada contas;
+● Insira as colunas id, nome, sobrenome, saldo, data_nascimento;
+● Encontre os melhores tipos de dados para as mesmas;
+● A coluna de id deve ser PRIMARY KEY, AUTO_INCREMENT e NOT NULL;
+● Crie um índice em saldo;
+● Adicione 3 registros na tabela;
+*/
 CREATE DATABASE banco;
 USE banco;
 

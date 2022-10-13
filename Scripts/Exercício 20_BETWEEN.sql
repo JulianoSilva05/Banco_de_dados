@@ -1,4 +1,4 @@
-/*
+/*Exercicio 20
 ● Na tabela de salário faça um SELECT;
 ● Selecione os salários em uma faixa de 125000 a 175000;
 ● Utilize o BETWEEN;
