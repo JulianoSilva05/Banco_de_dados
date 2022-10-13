@@ -104,10 +104,9 @@ DELETE FROM enderecos WHERE id>=1;
 
 # 6 - INDEX
 
-CREATE INDEX index_nome
-ON pessoas (nome);
-
-SHOW INDEX FROM pessoas;
+CREATE INDEX index_title
+ON titles(title);
+SHOW INDEX FROM titles;
 
 # 7 - DELETE INDEX
 
@@ -122,13 +121,18 @@ CREATE TABLE contas (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nome VARCHAR(100),
   sobrenome VARCHAR(100),
-  saldo INT,
+  saldo DOUBLE(10,2),
   data_nascimento DATE
 );
+ALTER TABLE contas ADD COLUMN cpf VARCHAR(11) NOT NULL UNIQUE;
+ALTER TABLE contas MODIFY COLUMN cpf VARCHAR(12) NOT NULL UNIQUE;
+ALTER TABLE contas DROP COLUMN cpf;
+DESC contas;
+CREATE INDEX index_nome
+ON contas (nome);
 
-CREATE INDEX idx_saldo
-ON contas (saldo);
+INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Juliano", "Fernando", 10000, "1989-06-05");
+INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Bruna", "Souza", 25000, "1995-08-30");
+INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Bruna", "Sousa", 100000, "19821215");
 
-INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Matheus", "Battisti", 10000, "1991-02-05");
-INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Aléxia", "Couto", 25000, "1995-08-30");
-INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Bruno", "Ribeiro", 100000, "1982-12-15");
+SELECT * FROM contas;
