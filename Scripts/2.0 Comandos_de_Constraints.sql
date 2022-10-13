@@ -131,8 +131,9 @@ DESC contas;
 CREATE INDEX index_nome
 ON contas (nome);
 
-INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Juliano", "Fernando", 10000, "1989-06-05");
-INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Bruna", "Souza", 25000, "1995-08-30");
-INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES ("Bruna", "Sousa", 100000, "19821215");
+INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES 
+("Juliano", "Fernando", 10000, "1989-06-05"),
+("Bruna", "Sousa", 100000, "19821215");
+
 
 SELECT * FROM contas;
