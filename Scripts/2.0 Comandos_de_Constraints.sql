@@ -135,5 +135,25 @@ INSERT INTO contas (nome, sobrenome, saldo, data_nascimento) VALUES
 ("Juliano", "Fernando", 10000, "1989-06-05"),
 ("Bruna", "Sousa", 100000, "19821215");
 
-
 SELECT * FROM contas;
+
+#JOIN
+SELECT * FROM employees;
+SELECT * FROM salaries;
+/*Note que, em ambas tabelas os valores de emp_no repetem*/
+DESC employees;
+DESC salaries;
+
+-- Comando --
+/*
+SELECT tabela.coluna, tabela.coluna,tabela.coluna
+FROM tabela1
+INNER JOIN tabela2
+ON tabela1.colunaChave = tabela2.colunaChave;
+*/
+SELECT employees.first_name AS Nome,employees.last_name AS Sobrenome, salaries.salary AS "Salário", employees.birth_date AS "Aniversário"
+FROM employees
+INNER JOIN salaries
+ON employees.emp_no = salaries.emp_no
+WHERE salaries.salary >= 120000
+ORDER BY employees.first_name ASC;
