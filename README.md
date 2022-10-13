@@ -10,6 +10,8 @@ Topicos abordados nas aulas:
 - Apagar registros específicos;
 - Constraints; (chave primaria e estrangeira)
 
+*Para acompanhar a aula, instale o XAMPP e instale a base de dados  employees*
+
 1- Baixe a Base de dados (pasta BASE)
 
 2- com o XAMPP aberto, starta o MYSQL
