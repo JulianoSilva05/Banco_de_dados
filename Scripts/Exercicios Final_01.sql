@@ -107,10 +107,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`estaciona` (
   `cod` INT NOT NULL AUTO_INCREMENT,
-  `data_entrada` DATE NOT NULL,
-  `data_saida` DATE NULL DEFAULT 31/12/2022,
-  `hora_entrada` TIME NOT NULL,
-  `hora_saida` TIME NULL DEFAULT 00:00,
+  `data_entrada` DATE NULL,
+  `data_saida` DATE NULL,
+  `hora_entrada` TIME NULL,
+  `hora_saida` TIME NULL,
   `veiculo_placa` VARCHAR(8) NOT NULL,
   `patio_num` INT NOT NULL,
   PRIMARY KEY (`cod`),
